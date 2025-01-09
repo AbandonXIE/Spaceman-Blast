@@ -41,7 +41,7 @@ image_forest_battle = pygame.image.load('assets/forest_battle.png')
 
 sprite_wall_lab = Wall('assets/wall_lab.png', (0, 0))
 sprite_wall0 = Wall('assets/wall0.png', (0, 0))
-
+sprite_wall1 = Wall('assets/wall1.png', (0, 0))
 image_castle_battle = pygame.image.load('assets/castle_battle.png')
 image_forest_battle = pygame.image.load('assets/forest_battle.png')
 
@@ -352,10 +352,10 @@ while True:
                         move = 1
                         player = Player('assets/wall_lab.png', (64, 64))
 
-                        player_rect = [64, 128]
+                        player_rect = [512,400]
 
-                        enemyx = random.randint(164,924)
-                        enemyy = random.randint(164,700)
+                        enemyx = random.randint(50,974)
+                        enemyy = random.randint(50,750)
                         enemytype = random.randint(1,3)
 
                         pygame.display.update()
@@ -972,7 +972,7 @@ while True:
             wall = sprite_wall0
         case 1:
             bg = image_forest
-            wall = sprite_wall0
+            wall = sprite_wall1
         case 2:
             bg = image_lab
             wall = sprite_wall_lab
@@ -995,8 +995,12 @@ while True:
             bg = image_lose
             wall = sprite_wall0
 
-    window.blit(bg, (0, 0))
-    window.blit(wall.image, (0, 0))
+    if world != 1:
+        window.blit(bg, (0, 0))
+        window.blit(wall.image, (0, 0))
+    else:
+        window.blit(bg, (-player_rect[0], -player_rect[1]))
+        window.blit(wall.image, (-player_rect[0]+512, -player_rect[1]+400))
     
     match world:
         case 0:
@@ -1022,14 +1026,13 @@ while True:
         case 1:
             player = pygame.image.load("assets/red.png")
             player = pygame.transform.scale(player, (30, 40))
-            window.blit(player, player_rect)
-            window.blit(player, player_rect)
+            window.blit(player, (497, 380))
             if enemytype == 1:
-                window.blit(image_enemy1, (enemyx, enemyy))
+                window.blit(image_enemy1, (-player_rect[0]+enemyx+512, -player_rect[1]+enemyy+400))
             elif enemytype == 2:
-                window.blit(image_enemy2, (enemyx, enemyy))
+                window.blit(image_enemy2, (-player_rect[0]+enemyx+512, -player_rect[1]+enemyy+400))
             else:
-                window.blit(image_enemy3, (enemyx, enemyy))
+                window.blit(image_enemy3, (-player_rect[0]+enemyx+512, -player_rect[1]+enemyy+400))
 
         case 2:
             window.blit(sprite_wall_lab.image, (0, 0))
@@ -1047,7 +1050,6 @@ while True:
         case 3:
             player = pygame.image.load("assets/red.png")
             player = pygame.transform.scale(player, (30, 40))
-            window.blit(player, player_rect)
             window.blit(player, player_rect)
             window.blit(image_boss, (enemyx, enemyy))
 
@@ -1173,9 +1175,10 @@ while True:
             font_ingame = pygame.font.Font('assets/DTM-Mono-1.otf', 12)
             if interact_object == 10:
                 text_interact = font_ingame.render('Press Z to battle', True, (0, 0, 0))
+                window.blit(text_interact, (447, 355))
             else:
                 text_interact = font_ingame.render('Press Z to interact', True, (0, 0, 0))
-            window.blit(text_interact, ((player_rect[0] - 50), (player_rect[1] - 25)))
+                window.blit(text_interact, ((player_rect[0] - 50), (player_rect[1] - 25)))
 
     if dialog == 35 or dialog == 36:
         window.blit(image_food3, (404, 255))
