@@ -1,12 +1,12 @@
 Hey, Player!
 I'm glad to see you supporting my shabby game.
 
-### GAME INFO
+# GAME INFO
 
 The game is named Spaceman Blast and is a turn-based combat game.
 It's totally made my Kim Xie (or so-called AbandonXIE) himself.
 
-### HOW TO PLAY?
+# HOW TO PLAY?
 
 The manipulaton is simple.
 Press WASD or arrow keys to move.
@@ -15,7 +15,7 @@ When you chat with an NPC or in a battle, you should press Z key to continue.
 When you need to make a choice, press X, C or V keys and follow the instructions.
 You can use cheat keys (F1, F2 and F3) tomake your gameplay easier.
 
-### GAME MECHANICS
+# GAME MECHANICS
 
 ## MAIN MECHANICS
 
