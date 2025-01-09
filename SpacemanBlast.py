@@ -42,6 +42,7 @@ image_forest_battle = pygame.image.load('assets/forest_battle.png')
 sprite_wall_lab = Wall('assets/wall_lab.png', (0, 0))
 sprite_wall0 = Wall('assets/wall0.png', (0, 0))
 sprite_wall1 = Wall('assets/wall1.png', (0, 0))
+
 image_castle_battle = pygame.image.load('assets/castle_battle.png')
 image_forest_battle = pygame.image.load('assets/forest_battle.png')
 
@@ -137,7 +138,6 @@ buff = 0
 attack = 6 * lv
 hp = hplist[lv]
 defend = - 5 + lv * 5
-
 
 if world == 1 and exp <= 698:
     lv_enemy = ((exp + 50) // 100)
