@@ -117,10 +117,6 @@ image_blast = pygame.image.load('assets/blast.png')
 
 hplist = [20,35,60,90,120,200,400,1000,2700,8100]
 
-#save = '4304294967296'
-#save = int(save[1::])-300000000000
-#save = hex(save)
-
 world = 0
 move = 0
 battlemode = 0
@@ -155,17 +151,6 @@ hp_enemy = hplist[(lv_enemy - 1)]
 defend_enemy = - 5 + lv_enemy * 5
 coin_min = 3 + lv_enemy * 4
 coin_max = 10 + lv_enemy * 5
-
-#if:
-    #coins = int(save[9:2:-2])
-    #exp = int(save[2:7:2])
-    #if (exp // 100) <= 6:
-        #lv = (exp // 100)
-    #else: 
-        #exp = 699
-        #lv = 6
-    #sword = int(save[10])
-    #buff = int(save[8])
 
 player_rect = [710, 125]
 hero_rect = [140, 264]
@@ -280,24 +265,9 @@ while True:
         exp = 699
         lv = 6
 
-    if battlemode == 1:
-        if row == 2 and hero_rect[0] < 540:
-            hero_rect[0] += speed
-        if row == 2 and hero_rect[0] >= 540:
-            row = 3
-        if row != 2 and hero_rect[0] > 140:
-            hero_rect[0] -= speed
-        if row == 6 and enemy_rect[0] > 190:
-            enemy_rect[0] -= speed
-        if row == 6 and enemy_rect[0] <= 190:
-            row = 7
-        if row != 6 and enemy_rect[0] < 590:
-            enemy_rect[0] += speed
-
     attack = 6 * lv
     hp = hplist[lv]
     defend = - 5 + lv * 5
-    
 
     if (world == 1 or world == 307 or world == 308 or world == 309):
         lv_enemy = lv
@@ -313,6 +283,20 @@ while True:
     defend_enemy = - 5 + lv_enemy * 5
     coin_min = 3 + lv_enemy * 4
     coin_max = 10 + lv_enemy * 5
+
+    if battlemode == 1:
+        if row == 2 and hero_rect[0] < 540:
+            hero_rect[0] += speed
+        if row == 2 and hero_rect[0] >= 540:
+            row = 3
+        if row != 2 and hero_rect[0] > 140:
+            hero_rect[0] -= speed
+        if row == 6 and enemy_rect[0] > 190:
+            enemy_rect[0] -= speed
+        if row == 6 and enemy_rect[0] <= 190:
+            row = 7
+        if row != 6 and enemy_rect[0] < 590:
+            enemy_rect[0] += speed
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -1184,6 +1168,22 @@ while True:
         window.blit(image_lv_player, (100, 24))
         window.blit(image_lv_enemy, (820, 24))
 
+    if interactive:
+        if move == 1:
+            font_ingame = pygame.font.Font('assets/DTM-Mono-1.otf', 12)
+            if interact_object == 10:
+                text_interact = font_ingame.render('Press Z to battle', True, (0, 0, 0))
+            else:
+                text_interact = font_ingame.render('Press Z to interact', True, (0, 0, 0))
+            window.blit(text_interact, ((player_rect[0] - 50), (player_rect[1] - 25)))
+
+    if dialog == 35 or dialog == 36:
+        window.blit(image_food3, (404, 255))
+    if dialog == 40 or dialog == 41:
+        window.blit(image_food1, (454, 207))
+    if dialog == 45 or dialog == 46:
+        window.blit(image_food2, (454, 223))
+
     if battlemode == 0 and world != 0 and world != 318:
         window.blit(ingame_hp_bar_player, (12, 12))
         font_inst = pygame.font.Font('assets/DTM-Mono-1.otf', 20)
@@ -1195,27 +1195,11 @@ while True:
         window.blit(image_lv_player, (100, 24))
         window.blit(myexp, (100, 56))
 
-    if interactive:
-        if move == 1:
-            font_ingame = pygame.font.Font('assets/DTM-Mono-1.otf', 12)
-            if interact_object == 10:
-                text_interact = font_ingame.render('Press Z to battle', True, (0, 0, 0))
-            else:
-                text_interact = font_ingame.render('Press Z to interact', True, (0, 0, 0))
-            window.blit(text_interact, ((player_rect[0] - 50), (player_rect[1] - 25)))
-
     if world != 0 and world != 318:
         window.blit(image_coinbar, (326, 12))
         font_coin = pygame.font.Font('assets/DTM-Mono-1.otf', 40)
         text_coin = font_coin.render(str(coins), True, (255, 255, 255))
         window.blit(text_coin, ((512 - 14 * (len(str(coins)))), 22))
-
-    if dialog == 35 or dialog == 36:
-        window.blit(image_food3, (404, 255))
-    if dialog == 40 or dialog == 41:
-        window.blit(image_food1, (454, 207))
-    if dialog == 45 or dialog == 46:
-        window.blit(image_food2, (454, 223))
 
     # Update the screen display
     pygame.display.update()
